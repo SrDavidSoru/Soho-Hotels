@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ad386c5561e449b1996d29de1a6a1f9a" Name="Diagram1" ZoomLevel="108">
+        <EntityTypeShape EntityType="hoteles_efModel.act_hotel" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoteles_efModel.actividades" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoteles_efModel.cadenas" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoteles_efModel.ciudades" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hoteles_efModel.hoteles" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="hoteles_efModel.FK_act_hotel1_actividades" ManuallyRouted="false" />
+        <AssociationConnector Association="hoteles_efModel.FK_act_hotel1_hoteles" ManuallyRouted="false" />
+        <AssociationConnector Association="hoteles_efModel.fk_hoteles_cadenas" ManuallyRouted="false" />
+        <AssociationConnector Association="hoteles_efModel.fk_hoteles_ciudades" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

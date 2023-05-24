@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hoteles_efModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="act_hotel">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="id_act" />
+    </Key>
+    <Property Name="id_ciudad" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="id_act" Type="int" Nullable="false" />
+    <Property Name="grado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="actividades">
+    <Key>
+      <PropertyRef Name="id_act" />
+    </Key>
+    <Property Name="id_act" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cadenas">
+    <Key>
+      <PropertyRef Name="cif" />
+    </Key>
+    <Property Name="cif" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dir_fis" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ciudades">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+    </Key>
+    <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="hoteles">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="id_ciudad" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="categoria" Type="int" Nullable="false" />
+    <Property Name="direccion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefono" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="cif" Type="varchar" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_act_hotel1_actividades">
+    <End Role="actividades" Type="Self.actividades" Multiplicity="1" />
+    <End Role="act_hotel" Type="Self.act_hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividades">
+        <PropertyRef Name="id_act" />
+      </Principal>
+      <Dependent Role="act_hotel">
+        <PropertyRef Name="id_act" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_act_hotel1_hoteles">
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="1" />
+    <End Role="act_hotel" Type="Self.act_hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoteles">
+        <PropertyRef Name="id_ciudad" />
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="act_hotel">
+        <PropertyRef Name="id_ciudad" />
+        <PropertyRef Name="nombre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_hoteles_cadenas">
+    <End Role="cadenas" Type="Self.cadenas" Multiplicity="1" />
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cadenas">
+        <PropertyRef Name="cif" />
+      </Principal>
+      <Dependent Role="hoteles">
+        <PropertyRef Name="cif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_hoteles_ciudades">
+    <End Role="ciudades" Type="Self.ciudades" Multiplicity="1" />
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ciudades">
+        <PropertyRef Name="id_ciudad" />
+      </Principal>
+      <Dependent Role="hoteles">
+        <PropertyRef Name="id_ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hoteles_efModelStoreContainer">
+    <EntitySet Name="act_hotel" EntityType="Self.act_hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="actividades" EntityType="Self.actividades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cadenas" EntityType="Self.cadenas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ciudades" EntityType="Self.ciudades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hoteles" EntityType="Self.hoteles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_act_hotel1_actividades" Association="Self.FK_act_hotel1_actividades">
+      <End Role="actividades" EntitySet="actividades" />
+      <End Role="act_hotel" EntitySet="act_hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_act_hotel1_hoteles" Association="Self.FK_act_hotel1_hoteles">
+      <End Role="hoteles" EntitySet="hoteles" />
+      <End Role="act_hotel" EntitySet="act_hotel" />
+    </AssociationSet>
+    <AssociationSet Name="fk_hoteles_cadenas" Association="Self.fk_hoteles_cadenas">
+      <End Role="cadenas" EntitySet="cadenas" />
+      <End Role="hoteles" EntitySet="hoteles" />
+    </AssociationSet>
+    <AssociationSet Name="fk_hoteles_ciudades" Association="Self.fk_hoteles_ciudades">
+      <End Role="ciudades" EntitySet="ciudades" />
+      <End Role="hoteles" EntitySet="hoteles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

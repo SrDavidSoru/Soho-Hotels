@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hoteles_efModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="act_hotel">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="id_act" />
+    </Key>
+    <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_act" Type="Int32" Nullable="false" />
+    <Property Name="grado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="actividades" Relationship="Self.FK_act_hotel1_actividades" FromRole="act_hotel" ToRole="actividades" />
+    <NavigationProperty Name="hoteles" Relationship="Self.FK_act_hotel1_hoteles" FromRole="act_hotel" ToRole="hoteles" />
+  </EntityType>
+  <EntityType Name="actividades">
+    <Key>
+      <PropertyRef Name="id_act" />
+    </Key>
+    <Property Name="id_act" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="act_hotel" Relationship="Self.FK_act_hotel1_actividades" FromRole="actividades" ToRole="act_hotel" />
+  </EntityType>
+  <EntityType Name="cadenas">
+    <Key>
+      <PropertyRef Name="cif" />
+    </Key>
+    <Property Name="cif" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dir_fis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="hoteles" Relationship="Self.fk_hoteles_cadenas" FromRole="cadenas" ToRole="hoteles" />
+  </EntityType>
+  <EntityType Name="ciudades">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+    </Key>
+    <Property Name="id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="hoteles" Relationship="Self.fk_hoteles_ciudades" FromRole="ciudades" ToRole="hoteles" />
+  </EntityType>
+  <EntityType Name="hoteles">
+    <Key>
+      <PropertyRef Name="id_ciudad" />
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="categoria" Type="Int32" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="telefono" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cif" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="act_hotel" Relationship="Self.FK_act_hotel1_hoteles" FromRole="hoteles" ToRole="act_hotel" />
+    <NavigationProperty Name="cadenas" Relationship="Self.fk_hoteles_cadenas" FromRole="hoteles" ToRole="cadenas" />
+    <NavigationProperty Name="ciudades" Relationship="Self.fk_hoteles_ciudades" FromRole="hoteles" ToRole="ciudades" />
+  </EntityType>
+  <Association Name="FK_act_hotel1_actividades">
+    <End Role="actividades" Type="Self.actividades" Multiplicity="1" />
+    <End Role="act_hotel" Type="Self.act_hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividades">
+        <PropertyRef Name="id_act" />
+      </Principal>
+      <Dependent Role="act_hotel">
+        <PropertyRef Name="id_act" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_act_hotel1_hoteles">
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="1" />
+    <End Role="act_hotel" Type="Self.act_hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hoteles">
+        <PropertyRef Name="id_ciudad" />
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="act_hotel">
+        <PropertyRef Name="id_ciudad" />
+        <PropertyRef Name="nombre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_hoteles_cadenas">
+    <End Role="cadenas" Type="Self.cadenas" Multiplicity="1" />
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cadenas">
+        <PropertyRef Name="cif" />
+      </Principal>
+      <Dependent Role="hoteles">
+        <PropertyRef Name="cif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_hoteles_ciudades">
+    <End Role="ciudades" Type="Self.ciudades" Multiplicity="1" />
+    <End Role="hoteles" Type="Self.hoteles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ciudades">
+        <PropertyRef Name="id_ciudad" />
+      </Principal>
+      <Dependent Role="hoteles">
+        <PropertyRef Name="id_ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hoteles_efEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="act_hotel" EntityType="Self.act_hotel" />
+    <EntitySet Name="actividades" EntityType="Self.actividades" />
+    <EntitySet Name="cadenas" EntityType="Self.cadenas" />
+    <EntitySet Name="ciudades" EntityType="Self.ciudades" />
+    <EntitySet Name="hoteles" EntityType="Self.hoteles" />
+    <AssociationSet Name="FK_act_hotel1_actividades" Association="Self.FK_act_hotel1_actividades">
+      <End Role="actividades" EntitySet="actividades" />
+      <End Role="act_hotel" EntitySet="act_hotel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_act_hotel1_hoteles" Association="Self.FK_act_hotel1_hoteles">
+      <End Role="hoteles" EntitySet="hoteles" />
+      <End Role="act_hotel" EntitySet="act_hotel" />
+    </AssociationSet>
+    <AssociationSet Name="fk_hoteles_cadenas" Association="Self.fk_hoteles_cadenas">
+      <End Role="cadenas" EntitySet="cadenas" />
+      <End Role="hoteles" EntitySet="hoteles" />
+    </AssociationSet>
+    <AssociationSet Name="fk_hoteles_ciudades" Association="Self.fk_hoteles_ciudades">
+      <End Role="ciudades" EntitySet="ciudades" />
+      <End Role="hoteles" EntitySet="hoteles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

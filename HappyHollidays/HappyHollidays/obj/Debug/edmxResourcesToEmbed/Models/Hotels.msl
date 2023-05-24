@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hoteles_efModelStoreContainer" CdmEntityContainer="hoteles_efEntities">
+    <EntitySetMapping Name="act_hotel">
+      <EntityTypeMapping TypeName="hoteles_efModel.act_hotel">
+        <MappingFragment StoreEntitySet="act_hotel">
+          <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_act" ColumnName="id_act" />
+          <ScalarProperty Name="grado" ColumnName="grado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="actividades">
+      <EntityTypeMapping TypeName="hoteles_efModel.actividades">
+        <MappingFragment StoreEntitySet="actividades">
+          <ScalarProperty Name="id_act" ColumnName="id_act" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cadenas">
+      <EntityTypeMapping TypeName="hoteles_efModel.cadenas">
+        <MappingFragment StoreEntitySet="cadenas">
+          <ScalarProperty Name="cif" ColumnName="cif" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="dir_fis" ColumnName="dir_fis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ciudades">
+      <EntityTypeMapping TypeName="hoteles_efModel.ciudades">
+        <MappingFragment StoreEntitySet="ciudades">
+          <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hoteles">
+      <EntityTypeMapping TypeName="hoteles_efModel.hoteles">
+        <MappingFragment StoreEntitySet="hoteles">
+          <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="cif" ColumnName="cif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
